@@ -1,0 +1,16 @@
+{
+    "C_Cpp.clang_format_style": "{BasedOnStyle: LLVM, IndentWidth: 6, IndentCaseLabels: false, TabWidth: 4, UseTab: ForIndentation, ColumnLimit: 0}",
+    "C_Cpp.clang_format_fallbackStyle": "Google",
+    "C_Cpp.default.compilerPath": "C:\\msys64\\mingw64\\bin\\g++.exe",
+    "files.associations": {
+        "array": "cpp",
+        "bitset": "cpp",
+        "string_view": "cpp",
+        "initializer_list": "cpp",
+        "ranges": "cpp",
+        "span": "cpp",
+        "stacktrace": "cpp",
+        "regex": "cpp",
+        "valarray": "cpp"
+    },
+}
