@@ -2,11 +2,21 @@
 using namespace std;
 
 
-// Given an array of integers and a window size k, output the median value of each sliding 
-// window of size k as it moves from the beginning of the array to the end.
 
 vector<int> median(vector<int> &arr, int k) {
+  vector<int> ans;
+
+  if(arr.size() < k) {
+    return {};
+  }
+
+  for(int i = 0; i <= arr.size() - k; i++) {
+    vector<int> window(arr.begin() + i, arr.begin() + i + k);
+    sort(window.begin(), window.end());
+    ans.push_back(window[k/2]);
+  }
   
+  return ans;
 }
 
 int main() {
@@ -16,7 +26,7 @@ int main() {
 
   vector<int> ans = median(arr, k);
 
-  for(auto &a: ams) {
+  for(auto &a: ans) {
     cout << a << " ";
   }
 

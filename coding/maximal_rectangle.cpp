@@ -1,8 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// Given a 2D binary matrix of 0's and 1's, find the largest rectangle containing only 1's and return its area.
-
 int maximalRectangle(vector<vector<char>> &matrix) {
 	  int m = matrix.size();
 	  int n = matrix[0].size();

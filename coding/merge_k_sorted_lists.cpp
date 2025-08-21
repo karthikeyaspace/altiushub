@@ -2,9 +2,6 @@
 using namespace std;
 
 
-// You are given an array of k linkedlist heads, each list being sorted in ascending order. Write
-// a function to merge all the lists into one sorted linked list and return its head.
-
 vector<int> merge2arrays(vector<int> &a, vector<int> &b) {
   int n = a.size();
   int m = b.size();
@@ -40,6 +37,7 @@ vector<int> mergeK(vector<vector<int>> &lists){
   
   vector<int> ans = lists[0];
 
+  // merging 2 at a time
   for(int i = 1; i<n; i++) {
     ans = merge2arrays(ans, lists[i]);
   }
