@@ -14,7 +14,8 @@ urlpatterns = [
     path('inventory/', views.inventory_view, name='inventory'),
     path('update-inventory/', views.update_inventory_view, name='update_inventory'),
 
-    path('session/', views.session_view, name='session')
+    path('session/', views.session_view, name='session'),
+    path('sessions/', views.all_sessions_view, name='all_sessions')
 ]
 
 # end points

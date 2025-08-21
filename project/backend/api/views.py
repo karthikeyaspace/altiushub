@@ -26,6 +26,7 @@ def signup_view(request):
     # Endpoint for both login and signup
     # If user doesnot exist, create one, create session, validate user and passowrd with hash etc
     # If user exists, check username, password, existing role, create session
+
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
         username = data.get('username')
@@ -43,7 +44,6 @@ def signup_view(request):
             if present_user.role != role:
                 return JsonResponse({'success': False, 'message': 'Incorrect role selected'})
 
-            # Delete old sessions and create new session
             Session.objects.filter(user=present_user).delete()
             Session.objects.create(
                 user=present_user, expires_at=timezone.now() + timedelta(hours=1)
@@ -197,7 +197,8 @@ def update_inventory_view(request):
 def session_view(request):
     if request.method == 'GET':
         # get user session for user auth
-        user_id = request.GET.get('user_id')
+        data = json.loads(request.body.decode('utf-8'))
+        user_id = data.get('user_id')
         session = Session.objects.filter(user_id=user_id).first()
         if not session:
             return JsonResponse({'success': False, 'error': 'Session not found'}, status=404)
@@ -211,9 +212,24 @@ def session_view(request):
         return HttpResponseNotAllowed(['GET'])
 
 
+def all_sessions_view(request):
+    if request.method == 'GET':
+        sessions = Session.objects.all()
+        session_list = []
+        for session in sessions:
+            session_list.append({
+                'id': session.id,
+                'user_id': session.user.id,
+                'expires_at': session.expires_at
+            })
+        return JsonResponse({'success': True, 'sessions': session_list})
+    else:
+        return HttpResponseNotAllowed(['GET'])
+
+
 def check_session(user_id) -> bool:
     session = Session.objects.filter(user_id=user_id).first()
     if not session:
         return False
-    
+
     return session.expires_at > timezone.now()
